@@ -1,0 +1,17 @@
+# Compiled output
+/out/
+*.class
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IntelliJ / VS Code
+.idea/
+.vscode/
+
+# Local config
+.env
