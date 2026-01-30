@@ -1,17 +1,22 @@
-# Compiled output
-/out/
+# Compiled Java
 *.class
 
-# Logs
-*.log
+# Build directories
+build/
+out/
 
-# OS files
+# Tomcat
+apache-tomcat-*/
+Servers/
+
+# Web output
+WEB-INF/classes/
+WEB-INF/lib/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
 .DS_Store
 Thumbs.db
-
-# IntelliJ / VS Code
-.idea/
-.vscode/
-
-# Local config
-.env

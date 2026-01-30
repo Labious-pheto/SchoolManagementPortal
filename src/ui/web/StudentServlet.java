@@ -3,11 +3,16 @@ package ui.web;
 import student.service.StudentService;
 import student.model.Gender;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
+@WebServlet("/students")
 public class StudentServlet extends HttpServlet {
 
     private StudentService studentService;
@@ -25,7 +30,13 @@ public class StudentServlet extends HttpServlet {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         LocalDate dob = LocalDate.parse(req.getParameter("dob"));
-        Gender gender = Gender.valueOf(req.getParameter("gender").toUpperCase());
+        String genderParam = req.getParameter("gender");
+        Gender gender;
+        try {
+            gender = Gender.valueOf(genderParam);
+        } catch (IllegalArgumentException e) {
+    throw new ServletException("Invalid gender value: " + genderParam);
+}
 
         studentService.registerStudent(
                 admissionNo,
@@ -35,6 +46,6 @@ public class StudentServlet extends HttpServlet {
                 gender
         );
 
-        resp.sendRedirect("/students.html");
+        resp.sendRedirect("students.html");
     }
 }
